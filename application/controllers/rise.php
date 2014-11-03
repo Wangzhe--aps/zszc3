@@ -87,7 +87,8 @@ class Rise extends MY_Controller {
 			'pro_des'=>$this->input->post('pro_des'),
 			'pro_video'=>$this->input->post('pro_video'),
 			'user_id'=>$user_id,
-			'pro_det'=>$content
+			'pro_det'=>$content,
+			'pro_start'=>date('Y-m-d',time())
 			);
 		// 通过项目名称查到钢发起的项目信息
 		$pro=$this->pro_info->check_pro_name($this->input->post('pro_title'));
