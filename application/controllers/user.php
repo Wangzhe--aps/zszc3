@@ -71,6 +71,25 @@ class User extends MY_Controller {
 		$this->session->set_userdata($data_session);
 		redirect('user/s_my');
 	} 
+	public function delete_my_pro(){
+		$pro_id=$this->uri->segment(3);
+
+		$this->load->model('pro_info_model','pro_info');
+		$pro=$this->pro_info->check_pro($pro_id);
+		$status=$pro[0]['pro_status'];
+		switch ($status) {
+			case '0':
+				error('项目正在进行，无法删除');
+				break;
+			case '2':
+				error('项目已结束无法删除');
+				break;
+			case '1':
+				$this->pro_info->delete_pro($pro_id);
+				success('user/s_my','项目已删除');
+				break;
+		}
+	}
 }
 
 /* End of file user.php */
